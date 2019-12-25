@@ -75,9 +75,11 @@
 			<plugin>
 				  <groupId>org.jacoco</groupId>
 				  <artifactId>jacoco-maven-plugin</artifactId>
-				  <configuration>
-				      <append>true</append>
-				  </configuration>
+				
+				  <excludes>
+       					 <exclude>**/entities/*java</exclude>
+    				  </excludes>
+				
 				  <executions>
 				      <execution>
 					  <goals>
