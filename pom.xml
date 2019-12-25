@@ -79,7 +79,7 @@
 				  <configuration>
 					    <excludes>
 					       <!-- Exclude class from test coverage -->
-						<exclude>**/com/infotech/book/ticket/app/entities/Ticket.java</exclude>
+						<exclude>src/main/java/com/infotech/book/ticket/app/entities/Ticket.java</exclude>
 					    </excludes>
 				  </configuration>
 				
