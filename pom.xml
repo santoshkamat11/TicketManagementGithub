@@ -76,9 +76,12 @@
 				  <groupId>org.jacoco</groupId>
 				  <artifactId>jacoco-maven-plugin</artifactId>
 				
-				  <excludes>
-       					 <exclude>**/entities/*java</exclude>
-    				  </excludes>
+				  <configuration>
+					    <excludes>
+					       <!-- Exclude class from test coverage -->
+						<exclude>**/entities/*java</exclude>
+					    </excludes>
+                		  </configuration
 				
 				  <executions>
 				      <execution>
