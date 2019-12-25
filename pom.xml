@@ -81,7 +81,7 @@
 					       <!-- Exclude class from test coverage -->
 						<exclude>**/entities/*java</exclude>
 					    </excludes>
-                		  </configuration
+				  </configuration>
 				
 				  <executions>
 				      <execution>
