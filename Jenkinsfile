@@ -12,6 +12,15 @@ node{
   
   }
   
+  stage('SonarQube-Analysis'){
+  
+    withSonarQubeEnv('sonar-7'){
+      
+      bat 'mvn sonar:sonar'
+    }
+  
+  }
+  
   stage('Email-Notification'){
   
     mail bcc: '', body: 'Hi. Welcome to jenkins', cc: '', from: '', replyTo: '', subject: 'Jenkins Job', to: 'pranavkamat11@gmail.com'
