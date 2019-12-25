@@ -21,6 +21,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infotech.book.ticket.app.entities.Ticket;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -47,7 +49,7 @@ public class TicketBookingManagementAppApplicationTests {
 		ticket.setPassengerName("Santosh");
 		ticket.setEmail("pranav@gmail.com");
 		ticket.setDestStation("Hyderabad");
-		ticket.setBookingDate(new Date());
+		ticket.setBookingDate(new Date(2323223232L));
 		
 		HttpEntity<Ticket> entity = new HttpEntity<Ticket>(ticket, headers);
 
@@ -62,7 +64,28 @@ public class TicketBookingManagementAppApplicationTests {
 	}
 	
 	@Test
-	public void test2_getAllTickets() {
+	public void test2_getAllTickets() throws JsonProcessingException {
+		
+		
+		
+		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+		
+		ResponseEntity<String> response = restTemplate.exchange(
+				createURLWithPort("/api/tickets/ticket/alltickets"),
+				HttpMethod.GET, entity, String.class);
+		
+		System.out.println(response.getBody());
+		
+		String expected = "[{\"ticketId\":1,\"passengerName\":\"Santosh\",\"bookingDate\":2323223232,\"sourceStation\":\"Pune\",\"destStation\":\"Hyderabad\",\"email\":\"pranav@gmail.com\"}]";
+		System.out.println(expected);
+		assertTrue(expected.equals(response.getBody()));
+		
+	}
+	
+	
+	
+	@Test
+	public void test3_getTicketById() {
 		
 		Ticket ticket = new Ticket();
 		
@@ -89,7 +112,7 @@ public class TicketBookingManagementAppApplicationTests {
 	}
 	
 	@Test
-	public void test3_deleteTicket() {
+	public void test4_deleteTicket() {
 		
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 		
@@ -102,7 +125,7 @@ public class TicketBookingManagementAppApplicationTests {
 	}
 	
 	@Test
-	public void test4_updateTicket() {
+	public void test5_updateTicket() {
 		
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 		
@@ -116,5 +139,10 @@ public class TicketBookingManagementAppApplicationTests {
 	
 	private String createURLWithPort(String uri) {
 		return "http://localhost:" + port + uri;
+	}
+	
+	private String mapToJson(Object object) throws JsonProcessingException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		return objectMapper.writeValueAsString(object);
 	}
 }
