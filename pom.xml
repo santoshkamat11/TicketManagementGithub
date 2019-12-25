@@ -77,10 +77,7 @@
 				  <artifactId>jacoco-maven-plugin</artifactId>
 				
 				  <configuration>
-					    <excludes>
-					       <!-- Exclude class from test coverage -->
-						<exclude>src/main/java/com/infotech/book/ticket/app/entities/Ticket.java</exclude>
-					    </excludes>
+					    <excludes>src/main/java/com/infotech/book/ticket/app/entities/Ticket.java</excludes>
 				  </configuration>
 				
 				  <executions>
