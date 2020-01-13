@@ -12,5 +12,20 @@ node('unix-slave'){
   
   }
   
+  stage('Push the image'){
+  
+    sh 'sudo docker login -u santoshkamat11 -p police12@'
+    sh 'sudo docker push santoshkamat11/ticket-booking:0.0.2-SNAPSHOT'
+    echo 'Image pushed to the repository successfully'
+    
+  }
+  
+  stage('Pull the image'){
+  
+    sh 'sudo docker pull santoshkamat11/ticket-booking:0.0.2-SNAPSHOT'
+    sh 'sudo docker run -p 7070:8080 santoshkamat11/ticket-booking:0.0.2-SNAPSHOT'
+  
+  }
+  
   
 }
