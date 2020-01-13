@@ -26,15 +26,15 @@ node('linux-latest-slave'){
   
     sshagent ( ['jenkins-kubernetes-user']){
       
-      sh 'scp -o StrictHostKeyChecking=no services.yml pods.yml jenkins-kubernetes-user@34.69.75.204:/home/jenkins-kubernetes-user/'
+      sh 'scp -o StrictHostKeyChecking=no services.yml pods.yml jenkins-kubernetes-user@10.128.0.31:/home/jenkins-kubernetes-user/'
     
       script{
       
         try{
-            sh 'jenkins-kubernetes-user@34.69.75.204 kubectl apply -f .'
+            sh 'jenkins-kubernetes-user@10.128.0.31 kubectl apply -f .'
         }
         catch(error){
-            sh 'jenkins-kubernetes-user@34.69.75.204 kubectl create -f .'
+            sh 'jenkins-kubernetes-user@10.128.0.31 kubectl create -f .'
         }
         
       }
