@@ -1,4 +1,4 @@
-node('unix-slave'){
+node('linux-latest-slave'){
   
   stage('SCM Checkout'){
 
