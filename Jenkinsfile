@@ -21,16 +21,29 @@ node('linux-latest-slave'){
     echo 'image removed successfully'
 
   }
-
   
+  stage('Kubernetes'){
   
-  stage('Pull the image'){
-  
-    sh 'docker pull santoshkamat11/ticket-booking:0.0.2-SNAPSHOT'
-    sh 'docker run -p 7070:8080 santoshkamat11/ticket-booking:0.0.2-SNAPSHOT'
-    echo "Application started on port 8080. You can access on port 7070"
+    sshagent ( ['jenkins-kubernetes-user']){
+      
+      sh 'scp -o StrictHostKeyChecking=no services.yml pods.yml jenkins-kubernetes-user@35.198.223.144:/home/jenkins-kubernetes-user/'
+    
+      script{
+      
+        try{
+            sh 'jenkins-kubernetes-user@35.198.223.144 kubectl apply -f .'
+        }
+        catch{
+            sh 'jenkins-kubernetes-user@35.198.223.144 kubectl create -f .'
+        }
+        
+      }
+    }
   
   }
+
+  
+
   
   
 }
