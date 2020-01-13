@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: ticketbooking
   labels:
-    app: nodeapp
+    app: ticketbooking
 spec:
   containers:
     - name: ticketbooking
