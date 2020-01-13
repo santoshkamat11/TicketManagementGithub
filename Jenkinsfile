@@ -6,5 +6,11 @@ node('unix-slave'){
   
   }
   
+  stage('Compile-Package'){
+  
+    sh 'mvn clean install'
+  
+  }
+  
   
 }
