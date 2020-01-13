@@ -14,9 +14,11 @@ node('linux-latest-slave'){
   
   stage('Push the image'){
 
-    sh 'sudo docker login -u santoshkamat11 -p police12@'
-    sh 'sudo docker push santoshkamat11/ticket-booking:0.0.2-SNAPSHOT'
+    sh 'docker login -u santoshkamat11 -p police12@'
+    sh 'docker push santoshkamat11/ticket-booking:0.0.2-SNAPSHOT'
     echo 'Image pushed to the repository successfully'
+    sh 'docker rmi -f santoshkamat11/ticket-booking:0.0.2-SNAPSHOT'
+    echo 'image removed successfully'
 
   }
 
@@ -24,7 +26,7 @@ node('linux-latest-slave'){
   
   stage('Pull the image'){
   
-    sh 'docker pull santoshkamat11/ticket-booking:0.0.1-SNAPSHOT'
+    sh 'docker pull santoshkamat11/ticket-booking:0.0.2-SNAPSHOT'
     sh 'docker run -d -p 7070:8080 santoshkamat11/ticket-booking:0.0.2-SNAPSHOT'
     echo "Application started on port 8080. You can access on port 7070"
   
