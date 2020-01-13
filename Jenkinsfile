@@ -33,7 +33,7 @@ node('linux-latest-slave'){
         try{
             sh 'jenkins-kubernetes-user@35.198.223.144 kubectl apply -f .'
         }
-        catch{
+        catch(error){
             sh 'jenkins-kubernetes-user@35.198.223.144 kubectl create -f .'
         }
         
